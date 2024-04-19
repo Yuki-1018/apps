@@ -53,6 +53,7 @@
       const userAnswer = answerInput.value.trim().toLowerCase();
       if (userAnswer === correctAnswer) {
         correctCount++;
+        words[currentIndex].correct = true; // 正解フラグを設定する
       }
       currentIndex++;
       displayNextQuestion();
