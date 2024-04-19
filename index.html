@@ -1,19 +1,71 @@
-<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英単語クイズ</title>
-  <link rel="stylesheet" href="styles.css">
+  <title>英単語テスト</title>
 </head>
 <body>
-  <div class="container">
-    <h1>英単語クイズ</h1>
-    <div id="mode-selection">
-      <a href="mode1.html">モード1：日本語→英語</a>
-      <a href="mode2.html">モード2：英語→日本語</a>
-    </div>
+  <h1>英単語テスト</h1>
+  <button id="startButton">スタート</button>
+  <div id="quiz"></div>
+  <div id="result" style="display: none;">
+    <h2>結果</h2>
+    <p id="correctCount"></p>
+    <p id="incorrectWords"></p>
   </div>
+
+  <script>
+    const words = [
+      {"word": "apple", "meaning": "りんご"},
+      {"word": "banana", "meaning": "バナナ"},
+      {"word": "cat", "meaning": "猫"},
+      {"word": "dog", "meaning": "犬"},
+      {"word": "elephant", "meaning": "象"}
+    ];
+
+    let currentIndex = 0;
+    let correctCount = 0;
+    const quizContainer = document.getElementById('quiz');
+    const startButton = document.getElementById('startButton');
+    const resultDiv = document.getElementById('result');
+    const correctCountDisplay = document.getElementById('correctCount');
+    const incorrectWordsDisplay = document.getElementById('incorrectWords');
+
+    function startQuiz() {
+      startButton.style.display = 'none';
+      displayNextQuestion();
+    }
+
+    function displayNextQuestion() {
+      if (currentIndex < words.length) {
+        const currentWord = words[currentIndex];
+        quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
+                                  <input type="text" id="answerInput">
+                                  <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
+      } else {
+        showResult();
+      }
+    }
+
+    function checkAnswer(correctAnswer) {
+      const answerInput = document.getElementById('answerInput');
+      const userAnswer = answerInput.value.trim().toLowerCase();
+      if (userAnswer === correctAnswer) {
+        correctCount++;
+      }
+      currentIndex++;
+      displayNextQuestion();
+    }
+
+    function showResult() {
+      resultDiv.style.display = 'block';
+      correctCountDisplay.textContent = `正解数: ${correctCount}/${words.length}`;
+      const incorrectWords = words.filter(word => !word.correct).map(word => word.word);
+      incorrectWordsDisplay.textContent = `間違った単語: ${incorrectWords.join(', ')}`;
+    }
+
+    startButton.addEventListener('click', startQuiz);
+  </script>
 </body>
 </html>
