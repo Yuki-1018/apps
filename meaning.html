@@ -145,7 +145,7 @@
         score++;
       } else {
         // 不正解の単語を表示
-        incorrectWordsDisplay.textContent += ` ${words[currentQuestionIndex].word} + ','`;
+        incorrectWordsDisplay.textContent += ` ${words[currentQuestionIndex].word} ,`;
       }
       currentQuestionIndex++;
       if (currentQuestionIndex < words.length) {
