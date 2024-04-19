@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>英単語クイズ</title>
+</head>
+<body>
+  <h1>英単語クイズ</h1>
+  <div id="quiz"></div>
+  <div id="result" style="display: none;">
+    <h2>結果</h2>
+    <p id="score"></p>
+  </div>
+
+  <script>
+    const words = [
+      {"word": "apple", "meaning": "りんご"},
+      {"word": "banana", "meaning": "バナナ"},
+      {"word": "cat", "meaning": "猫"},
+      {"word": "dog", "meaning": "犬"},
+      {"word": "elephant", "meaning": "象"}
+    ];
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    const quizContainer = document.getElementById('quiz');
+    const resultDiv = document.getElementById('result');
+    const scoreDisplay = document.getElementById('score');
+
+    function startQuiz() {
+      showQuestion();
+    }
+
+    function showQuestion() {
+      const currentWord = words[currentQuestionIndex];
+      const choices = generateChoices(currentWord.meaning);
+      const choiceButtons = choices.map(choice => `<button onclick="checkAnswer('${currentWord.meaning}', '${choice}')">${choice}</button>`).join('');
+      quizContainer.innerHTML = `<p>${currentWord.word}</p>${choiceButtons}`;
+    }
+
+    function generateChoices(correctMeaning) {
+      const choices = [correctMeaning];
+      while (choices.length < 4) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        const randomWord = words[randomIndex].meaning;
+        if (!choices.includes(randomWord)) {
+          choices.push(randomWord);
+        }
+      }
+      return shuffleArray(choices);
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function checkAnswer(correctMeaning, selectedMeaning) {
+      if (correctMeaning === selectedMeaning) {
+        score++;
+      }
+      currentQuestionIndex++;
+      if (currentQuestionIndex < words.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      resultDiv.style.display = 'block';
+      scoreDisplay.textContent = `正解数: ${score}/${words.length}`;
+    }
+
+    startQuiz();
+  </script>
+</body>
+</html>
