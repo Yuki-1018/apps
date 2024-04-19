@@ -1,9 +1,12 @@
 [
-    {"english": "apple", "japanese": "りんご"},
-    {"english": "banana", "japanese": "バナナ"},
-        {"english": "banan", "japanese": "バナナっf"},
-        {"english": "bananaっっf", "japanese": "dgrバナナ"},
-        {"english": "bananaどr", "japanese": "おcおrバナナ"},
-        {"english": "bananaいdkf", "japanese": "バナナおふぉおf"},
-
+  { "word": "apple", "meaning": "りんご" },
+  { "word": "banana", "meaning": "バナナ" },
+  { "word": "carrot", "meaning": "にんじん" },
+  { "word": "dog", "meaning": "犬" },
+  { "word": "elephant", "meaning": "象" },
+  { "word": "flower", "meaning": "花" },
+  { "word": "guitar", "meaning": "ギター" },
+  { "word": "hamburger", "meaning": "ハンバーガー" },
+  { "word": "ice cream", "meaning": "アイスクリーム" },
+  { "word": "jacket", "meaning": "ジャケット" }
 ]
