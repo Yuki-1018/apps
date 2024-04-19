@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>英単語クイズアプリ</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div id="mode-selection">
+        <button onclick="startQuiz('meaning')">日本語の意味 → 英単語</button>
+        <button onclick="startQuiz('word')">英単語 → 日本語の意味</button>
+    </div>
+
+    <div id="quiz-container" style="display: none;">
+        <!-- クイズのコンテンツがここに挿入されます -->
+    </div>
+
+    <div id="result-container" style="display: none;">
+        <!-- 結果がここに挿入されます -->
+    </div>
+
+    <script src="quiz.js"></script>
+</body>
+</html>
