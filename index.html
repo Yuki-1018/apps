@@ -16,13 +16,13 @@
   </div>
 
   <script>
-    const words = [
-      {"word": "apple", "meaning": "りんご"},
-      {"word": "banana", "meaning": "バナナ"},
-      {"word": "cat", "meaning": "猫"},
-      {"word": "dog", "meaning": "犬"},
-      {"word": "elephant", "meaning": "象"}
-    ];
+    let words;
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        words = data;
+      })
+      .catch(error => console.error('データを読み込めませんでした。', error));
 
     let currentIndex = 0;
     let correctCount = 0;
