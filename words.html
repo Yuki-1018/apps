@@ -42,7 +42,10 @@
 <body>
   <h1>英単語一覧</h1>
   <ul id="wordList"></ul>
+<form>
+        <input type="button" value="戻る" onclick="history.back()">
 
+    </form>
   <script>
     fetch('data.json')
       .then(response => response.json())
