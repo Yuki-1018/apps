@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英単語テスト</title>
-<style>
+  <title>英単語クイズ</title>
+  <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #f0f0f0;
       margin: 0;
       padding: 0;
@@ -14,133 +14,56 @@
 
     h1 {
       text-align: center;
-      margin-top: 20px;
+      margin-top: 50px;
+      font-size: 36px;
+      color: #333;
     }
 
-    #quiz {
-      margin-top: 20px;
+    .mode-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      margin-top: 50px;
+    }
+
+    .mode-button {
+      width: 250px;
       padding: 20px;
-      background-color: #fff;
+      background-color: #4CAF50;
       border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    input[type="text"] {
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-      box-sizing: border-box;
-    }
-
-    button {
-      display: block;
-      width: 100%;
-      padding: 10px;
-      margin-top: 10px;
-      font-size: 16px;
-      background-color: #4caf50;
-      color: #fff;
-      border: none;
-      border-radius: 5px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+      margin: 20px;
+      text-align: center;
       cursor: pointer;
+      transition: transform 0.2s;
+      font-size: 24px;
+      color: #fff;
+      text-decoration: none;
     }
 
-    button:hover {
+    .mode-button:hover {
       background-color: #45a049;
+      transform: scale(1.05);
     }
 
-    #result {
-      margin-top: 20px;
-      padding: 20px;
-      background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    @media only screen and (max-width: 600px) {
+      h1 {
+        font-size: 24px;
+      }
+
+      .mode-button {
+        width: 200px;
+        font-size: 18px;
+      }
     }
   </style>
 </head>
 <body>
-  <h1>英単語テスト</h1>
-  <button id="startButton">スタート</button>
-  <input type="checkbox" id="randomCheckbox">
-  <label for="randomCheckbox">ランダム出題</label>
-  <div id="quiz"></div>
-  <div id="result" style="display: none;">
-    <h2>結果</h2>
-    <p id="correctCount"></p>
-    <p id="incorrectWords"></p>
+  <h1>英単語クイズ</h1>
+  <div class="mode-container">
+    <a class="mode-button" href="meaning.html">意味で学ぶ</a>
+    <a class="mode-button" href="type.html">タイプで学ぶ</a>
   </div>
-
-  <script>
-    let words;
-    fetch('data.json')
-      .then(response => response.json())
-      .then(data => {
-        words = data;
-      })
-      .catch(error => console.error('データを読み込めませんでした。', error));
-
-    let currentIndex = 0;
-    let correctCount = 0;
-    let randomMode = false;
-    const quizContainer = document.getElementById('quiz');
-    const startButton = document.getElementById('startButton');
-    const randomCheckbox = document.getElementById('randomCheckbox');
-    const resultDiv = document.getElementById('result');
-    const correctCountDisplay = document.getElementById('correctCount');
-    const incorrectWordsDisplay = document.getElementById('incorrectWords');
-
-    function startQuiz() {
-      startButton.disabled = true;
-      randomCheckbox.disabled = true;
-      randomMode = randomCheckbox.checked;
-      currentIndex = 0;
-      correctCount = 0;
-      shuffleWords();
-      displayNextQuestion();
-    }
-
-    function shuffleWords() {
-      if (randomMode) {
-        for (let i = words.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [words[i], words[j]] = [words[j], words[i]];
-        }
-      }
-    }
-
-    function displayNextQuestion() {
-      if (currentIndex < words.length) {
-        const currentWord = words[currentIndex];
-        quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
-                                  <input type="text" id="answerInput">
-                                  <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
-      } else {
-        showResult();
-      }
-    }
-
-    function checkAnswer(correctAnswer) {
-      const answerInput = document.getElementById('answerInput');
-      const userAnswer = answerInput.value.trim().toLowerCase();
-      if (userAnswer === correctAnswer) {
-        correctCount++;
-        words[currentIndex].correct = true; // 正解フラグを設定する
-      }
-      currentIndex++;
-      displayNextQuestion();
-    }
-
-    function showResult() {
-      resultDiv.style.display = 'block';
-      correctCountDisplay.textContent = `正解数: ${correctCount}/${words.length}`;
-      const incorrectWords = words.filter(word => !word.correct).map(word => word.word);
-      incorrectWordsDisplay.textContent = `間違った単語: ${incorrectWords.join(', ')}`;
-    }
-
-    startButton.addEventListener('click', startQuiz);
-  </script>
 </body>
 </html>
