@@ -4,14 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>英単語クイズ</title>
-   <script>
-    // JavaScriptコードはここに配置
-    document.getElementById('startButton').addEventListener('click', function() {
-      document.getElementById('quiz').style.display = 'block';
-      this.disabled = true; // スタートボタンを無効化
-    });
-  </script>
-<style>
+  <style>
     body {
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
@@ -25,7 +18,7 @@
     }
 
     #quiz {
-      display: none; /* スタート前は非表示 */
+      display: none; /* スタート前に非表示 */
       margin-top: 20px;
       padding: 20px;
       background-color: #fff;
