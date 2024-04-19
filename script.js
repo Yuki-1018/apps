@@ -1,7 +1,7 @@
-// JSONデータをfetchする
 fetch('data.json')
   .then(response => response.json())
   .then(data => {
+    // JSONデータを取得した後の処理
     let mode; // 1 or 2
     let currentQuestionIndex = 0;
     let correctAnswers = 0;
@@ -25,22 +25,21 @@ fetch('data.json')
       }
     });
 
-function startQuiz() {
-  modeSelection.style.display = "none";
-  quizContainer.style.display = "block";
-  loadQuestion(); // loadQuestion 関数を呼び出す
-}
+    function startQuiz() {
+      modeSelection.style.display = "none";
+      quizContainer.style.display = "block";
+      loadQuestion();
+    }
 
-function loadQuestion() {
-  const currentQuestion = data[currentQuestionIndex];
-  // 問題文を正しく表示する
-  questionElement.textContent = mode === 1 ? currentQuestion.meaning : currentQuestion.word;
-  if (mode === 1) {
-    loadMode1Options(currentQuestion.word);
-  } else {
-    loadMode2Options(currentQuestion.meaning);
-  }
-}
+    function loadQuestion() {
+      const currentQuestion = data[currentQuestionIndex];
+      questionElement.textContent = mode === 1 ? currentQuestion.meaning : currentQuestion.word;
+      if (mode === 1) {
+        loadMode1Options(currentQuestion.word);
+      } else {
+        loadMode2Options(currentQuestion.meaning);
+      }
+    }
 
     function loadMode1Options(correctWord) {
       const options = getRandomOptions(correctWord);
@@ -113,4 +112,7 @@ function loadQuestion() {
         correctAnswersElement.appendChild(listItem);
       });
     }
+
+    // JSONデータ取得後にクイズを開始
+    startQuiz();
   });
