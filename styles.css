@@ -1,0 +1,21 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+#mode-selection {
+    text-align: center;
+    margin-top: 50px;
+}
+
+#quiz-container, #result-container {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.question {
+    margin-bottom: 10px;
+}
+
+.choices button {
+    margin: 5px;
+}
