@@ -4,11 +4,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>英単語クイズ</title>
-  <style>
-    #result {
-      width: 100%;
-    }
-  </style>
 </head>
 <body>
   <h1>英単語クイズ</h1>
@@ -102,6 +97,7 @@
 
     function showResult() {
       resultDiv.style.display = 'block';
+      quizContainer.style.display = 'none'; // 問題を非表示にする
       scoreDisplay.textContent = `正解数: ${score}/${words.length}`;
     }
 
