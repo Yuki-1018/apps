@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>英単語クイズ</title>
+  <title>英単語テスト</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -17,9 +17,9 @@
       margin-top: 20px;
     }
 
-    .container {
-      max-width: 600px;
-      margin: 20px auto;
+    #quiz {
+      display: none; /* スタートボタンが押されるまで非表示 */
+      margin-top: 20px;
       padding: 20px;
       background-color: #fff;
       border-radius: 10px;
@@ -27,7 +27,6 @@
     }
 
     input[type="text"] {
-      display: none; /* スタートボタンが押されるまで非表示 */
       width: 100%;
       padding: 10px;
       margin-top: 10px;
@@ -54,29 +53,26 @@
       background-color: #45a049;
     }
 
-    #quiz, #result {
-      display: none; /* スタートボタンが押されるまで非表示 */
-    }
-
     #result {
+      display: none; /* 結果画面は最初は非表示 */
       margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>英単語クイズ</h1>
-    <input type="checkbox" id="randomCheckbox">
-    <label for="randomCheckbox">ランダム出題</label>
-    <button id="startButton">スタート</button>
-    <div id="quiz">
-      <input type="text" id="answerInput">
-    </div>
-    <div id="result">
-      <h2>結果</h2>
-      <p id="score"></p>
-      <p id="incorrectWords"></p>
-    </div>
+  <h1>英単語テスト</h1>
+  <button id="startButton">スタート</button>
+  <input type="checkbox" id="randomCheckbox">
+  <label for="randomCheckbox">ランダム出題</label>
+  <div id="quiz"></div>
+  <div id="result">
+    <h2>結果</h2>
+    <p id="correctCount"></p>
+    <p id="incorrectWords"></p>
   </div>
 
   <script>
@@ -88,29 +84,29 @@
       })
       .catch(error => console.error('データを読み込めませんでした。', error));
 
-    let currentQuestionIndex = 0;
-    let score = 0;
+    let currentIndex = 0;
+    let correctCount = 0;
+    let randomMode = false;
     const quizContainer = document.getElementById('quiz');
-    const answerInput = document.getElementById('answerInput');
     const startButton = document.getElementById('startButton');
     const randomCheckbox = document.getElementById('randomCheckbox');
     const resultDiv = document.getElementById('result');
-    const scoreDisplay = document.getElementById('score');
+    const correctCountDisplay = document.getElementById('correctCount');
     const incorrectWordsDisplay = document.getElementById('incorrectWords');
 
     function startQuiz() {
       startButton.disabled = true;
       randomCheckbox.disabled = true;
-      currentQuestionIndex = 0;
-      score = 0;
+      randomMode = randomCheckbox.checked;
+      currentIndex = 0;
+      correctCount = 0;
       shuffleWords();
-      showQuestion();
+      displayNextQuestion();
       quizContainer.style.display = 'block'; // スタート後に問題を表示
-      answerInput.style.display = 'block'; // スタート後に入力フィールドを表示
     }
 
     function shuffleWords() {
-      if (randomCheckbox.checked) {
+      if (randomMode) {
         for (let i = words.length - 1; i > 0; i--) {
           const j = Math.floor(Math.random() * (i + 1));
           [words[i], words[j]] = [words[j], words[i]];
@@ -118,43 +114,37 @@
       }
     }
 
-    function showQuestion() {
-      const currentWord = words[currentQuestionIndex];
-      answerInput.value = ''; // 入力フィールドを空にする
-      answerInput.focus(); // 入力フィールドにフォーカスを設定
-      quizContainer.innerHTML = `<p>${currentWord.word}</p>`;
-    }
-
-    function checkAnswer(correctMeaning, selectedMeaning) {
-      if (correctMeaning === selectedMeaning) {
-        score++;
-      } else {
-        // 不正解の単語を表示
-        incorrectWordsDisplay.textContent += ` ${words[currentQuestionIndex].word}`;
-      }
-      currentQuestionIndex++;
-      if (currentQuestionIndex < words.length) {
-        showQuestion();
+    function displayNextQuestion() {
+      if (currentIndex < words.length) {
+        const currentWord = words[currentIndex];
+        quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
+                                  <input type="text" id="answerInput">
+                                  <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
       } else {
         showResult();
       }
     }
 
+    function checkAnswer(correctAnswer) {
+      const answerInput = document.getElementById('answerInput');
+      const userAnswer = answerInput.value.trim().toLowerCase();
+      if (userAnswer === correctAnswer) {
+        correctCount++;
+        words[currentIndex].correct = true; // 正解フラグを設定する
+      }
+      currentIndex++;
+      displayNextQuestion();
+    }
+
     function showResult() {
       resultDiv.style.display = 'block';
       quizContainer.style.display = 'none'; // 結果画面では問題を非表示にする
-      answerInput.style.display = 'none'; // 結果画面では入力フィールドを非表示にする
-      scoreDisplay.textContent = `正解数: ${score}/${words.length}`;
+      correctCountDisplay.textContent = `正解数: ${correctCount}/${words.length}`;
+      const incorrectWords = words.filter(word => !word.correct).map(word => word.word);
+      incorrectWordsDisplay.textContent = `間違った単語: ${incorrectWords.join(', ')}`;
     }
 
     startButton.addEventListener('click', startQuiz);
-    answerInput.addEventListener('keyup', function(event) {
-      if (event.keyCode === 13) {
-        // Enterキーが押されたときに回答をチェックする
-        const currentWord = words[currentQuestionIndex];
-        checkAnswer(currentWord.meaning, answerInput.value.trim());
-      }
-    });
   </script>
 </body>
 </html>
