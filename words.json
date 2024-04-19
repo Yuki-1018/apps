@@ -1,5 +1,9 @@
 [
     {"english": "apple", "japanese": "りんご"},
     {"english": "banana", "japanese": "バナナ"},
+        {"english": "banana", "japanese": "バナナ"},
+        {"english": "banana", "japanese": "バナナ"},
+        {"english": "banana", "japanese": "バナナ"},
+        {"english": "banana", "japanese": "バナナ"},
     // 他の単語をここに追加
 ]
