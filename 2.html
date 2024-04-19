@@ -14,13 +14,14 @@
   </div>
 
   <script>
-    const words = [
-      {"word": "apple", "meaning": "りんご"},
-      {"word": "banana", "meaning": "バナナ"},
-      {"word": "cat", "meaning": "猫"},
-      {"word": "dog", "meaning": "犬"},
-      {"word": "elephant", "meaning": "象"}
-    ];
+    let words;
+    fetch('data.json')
+      .then(response => response.json())
+      .then(data => {
+        words = data;
+        startQuiz();
+      })
+      .catch(error => console.error('データを読み込めませんでした。', error));
 
     let currentQuestionIndex = 0;
     let score = 0;
@@ -75,8 +76,6 @@
       resultDiv.style.display = 'block';
       scoreDisplay.textContent = `正解数: ${score}/${words.length}`;
     }
-
-    startQuiz();
   </script>
 </body>
 </html>
