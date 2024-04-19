@@ -8,7 +8,8 @@
 <body>
   <h1>英単語テスト</h1>
   <button id="startButton">スタート</button>
-  <button id="randomButton" style="display: none;">ランダム出題</button>
+  <input type="checkbox" id="randomCheckbox" disabled>
+  <label for="randomCheckbox">ランダム出題</label>
   <div id="quiz"></div>
   <div id="result" style="display: none;">
     <h2>結果</h2>
@@ -27,26 +28,22 @@
 
     let currentIndex = 0;
     let correctCount = 0;
-    let randomizedWords;
     const quizContainer = document.getElementById('quiz');
     const startButton = document.getElementById('startButton');
-    const randomButton = document.getElementById('randomButton');
+    const randomCheckbox = document.getElementById('randomCheckbox');
     const resultDiv = document.getElementById('result');
     const correctCountDisplay = document.getElementById('correctCount');
     const incorrectWordsDisplay = document.getElementById('incorrectWords');
 
     function startQuiz() {
-      startButton.style.display = 'none';
-      randomButton.style.display = 'inline';
-      currentIndex = 0;
-      correctCount = 0;
-      randomizedWords = shuffleArray([...words]);
+      startButton.disabled = true;
+      randomCheckbox.disabled = true;
       displayNextQuestion();
     }
 
     function displayNextQuestion() {
-      if (currentIndex < randomizedWords.length) {
-        const currentWord = randomizedWords[currentIndex];
+      if (currentIndex < words.length) {
+        const currentWord = words[currentIndex];
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
                                   <input type="text" id="answerInput">
                                   <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
@@ -60,7 +57,7 @@
       const userAnswer = answerInput.value.trim().toLowerCase();
       if (userAnswer === correctAnswer) {
         correctCount++;
-        randomizedWords[currentIndex].correct = true; // 正解フラグを設定する
+        words[currentIndex].correct = true; // 正解フラグを設定する
       }
       currentIndex++;
       displayNextQuestion();
@@ -68,22 +65,12 @@
 
     function showResult() {
       resultDiv.style.display = 'block';
-      correctCountDisplay.textContent = `正解数: ${correctCount}/${randomizedWords.length}`;
-      const incorrectWords = randomizedWords.filter(word => !word.correct).map(word => word.word);
+      correctCountDisplay.textContent = `正解数: ${correctCount}/${words.length}`;
+      const incorrectWords = words.filter(word => !word.correct).map(word => word.word);
       incorrectWordsDisplay.textContent = `間違った単語: ${incorrectWords.join(', ')}`;
     }
 
-    // 配列をシャッフルする関数
-    function shuffleArray(array) {
-      for (let i = array.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [array[i], array[j]] = [array[j], array[i]];
-      }
-      return array;
-    }
-
     startButton.addEventListener('click', startQuiz);
-    randomButton.addEventListener('click', startQuiz);
   </script>
 </body>
 </html>
