@@ -19,7 +19,8 @@ function startQuiz(selectedMode) {
             words = data;
             // クイズを表示する
             displayNextQuestion();
-        });
+        })
+        .catch(error => console.error('データの読み込み中にエラーが発生しました:', error));
     modeSelection.style.display = 'none'; // モード選択画面を非表示にする
     quizContainer.style.display = 'block'; // クイズコンテナを表示する
 }
