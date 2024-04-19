@@ -28,6 +28,7 @@
 
     let currentIndex = 0;
     let correctCount = 0;
+    let randomMode = false;
     const quizContainer = document.getElementById('quiz');
     const startButton = document.getElementById('startButton');
     const randomCheckbox = document.getElementById('randomCheckbox');
@@ -38,7 +39,20 @@
     function startQuiz() {
       startButton.disabled = true;
       randomCheckbox.disabled = true;
+      randomMode = randomCheckbox.checked;
+      currentIndex = 0;
+      correctCount = 0;
+      shuffleWords();
       displayNextQuestion();
+    }
+
+    function shuffleWords() {
+      if (randomMode) {
+        for (let i = words.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [words[i], words[j]] = [words[j], words[i]];
+        }
+      }
     }
 
     function displayNextQuestion() {
