@@ -25,21 +25,22 @@ fetch('data.json')
       }
     });
 
-    function startQuiz() {
-      modeSelection.style.display = "none";
-      quizContainer.style.display = "block";
-      loadQuestion();
-    }
+function startQuiz() {
+  modeSelection.style.display = "none";
+  quizContainer.style.display = "block";
+  loadQuestion(); // loadQuestion 関数を呼び出す
+}
 
-    function loadQuestion() {
-      const currentQuestion = data[currentQuestionIndex];
-      questionElement.textContent = mode === 1 ? currentQuestion.meaning : currentQuestion.word;
-      if (mode === 1) {
-        loadMode1Options(currentQuestion.word);
-      } else {
-        loadMode2Options(currentQuestion.meaning);
-      }
-    }
+function loadQuestion() {
+  const currentQuestion = data[currentQuestionIndex];
+  // 問題文を正しく表示する
+  questionElement.textContent = mode === 1 ? currentQuestion.meaning : currentQuestion.word;
+  if (mode === 1) {
+    loadMode1Options(currentQuestion.word);
+  } else {
+    loadMode2Options(currentQuestion.meaning);
+  }
+}
 
     function loadMode1Options(correctWord) {
       const options = getRandomOptions(correctWord);
