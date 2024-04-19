@@ -7,9 +7,10 @@
 </head>
 <body>
   <h1>英単語クイズ</h1>
-  <div id="quiz"></div>
+  <input type="checkbox" id="randomCheckbox">
+  <label for="randomCheckbox">ランダム出題</label>
   <button id="startButton">スタート</button>
-  <button id="randomButton">ランダム</button>
+  <div id="quiz"></div>
   <div id="result" style="display: none;">
     <h2>結果</h2>
     <p id="score"></p>
@@ -29,38 +30,27 @@
     let score = 0;
     const quizContainer = document.getElementById('quiz');
     const startButton = document.getElementById('startButton');
-    const randomButton = document.getElementById('randomButton');
+    const randomCheckbox = document.getElementById('randomCheckbox');
     const resultDiv = document.getElementById('result');
     const scoreDisplay = document.getElementById('score');
     const incorrectWordsDisplay = document.getElementById('incorrectWords');
-    const incorrectWords = [];
-
-    startButton.addEventListener('click', startQuiz);
-    randomButton.addEventListener('click', shuffleQuestions);
 
     function startQuiz() {
       startButton.disabled = true;
-      randomButton.disabled = true;
+      randomCheckbox.disabled = true;
       currentQuestionIndex = 0;
       score = 0;
-      incorrectWords.length = 0;
       shuffleWords();
       showQuestion();
     }
 
     function shuffleWords() {
-      for (let i = words.length - 1; i > 0; i--) {
-        const j = Math.floor(Math.random() * (i + 1));
-        [words[i], words[j]] = [words[j], words[i]];
+      if (randomCheckbox.checked) {
+        for (let i = words.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [words[i], words[j]] = [words[j], words[i]];
+        }
       }
-    }
-
-    function shuffleQuestions() {
-      currentQuestionIndex = 0;
-      score = 0;
-      incorrectWords.length = 0;
-      shuffleWords();
-      showQuestion();
     }
 
     function showQuestion() {
@@ -94,7 +84,8 @@
       if (correctMeaning === selectedMeaning) {
         score++;
       } else {
-        incorrectWords.push(words[currentQuestionIndex].word);
+        // 不正解の単語を表示
+        incorrectWordsDisplay.textContent += ` ${words[currentQuestionIndex].word}`;
       }
       currentQuestionIndex++;
       if (currentQuestionIndex < words.length) {
@@ -107,12 +98,9 @@
     function showResult() {
       resultDiv.style.display = 'block';
       scoreDisplay.textContent = `正解数: ${score}/${words.length}`;
-      if (incorrectWords.length > 0) {
-        incorrectWordsDisplay.textContent = `間違った単語: ${incorrectWords.join(', ')}`;
-      } else {
-        incorrectWordsDisplay.textContent = '全問正解です！';
-      }
     }
+
+    startButton.addEventListener('click', startQuiz);
   </script>
 </body>
 </html>
