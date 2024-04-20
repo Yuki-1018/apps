@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>英単語テスト</title>
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
    <link rel="stylesheet" href="./style.css">
   <style>
     body {
@@ -125,7 +125,7 @@
       if (currentIndex < words.length) {
         const currentWord = words[currentIndex];
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
-                                  <input type="text" id="answerInput" class="js-kioskboard-input" data-kioskboard-type="keyboard" data-kioskboard-placement="bottom" data-kioskboard-specialcharacters="false">
+                                  <input type="text" id="answerInput" placeholder="username">
                                   <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
       } else {
         showResult();
