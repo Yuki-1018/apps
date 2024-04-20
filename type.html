@@ -7,6 +7,17 @@
  <script src="jqk.layout.en.js"></script>
   <script src="jqkeyboard-min.js"></script>
   <link href="jqkeyboard.css" rel="stylesheet" />
+  <script>
+    $(function () {
+    "use strict";
+
+    jqKeyboard.init({
+        containment: "#answerInput",
+        allowed: ["input[type='text']", "#username-input"],
+        icon: "dark"
+    });
+});
+  </script>
   <style>
     body {
       font-family: Arial, sans-serif;
