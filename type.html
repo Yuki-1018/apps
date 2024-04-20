@@ -125,7 +125,7 @@
       if (currentIndex < words.length) {
         const currentWord = words[currentIndex];
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
-          <script src="./script.js"></script>
+
                                   <input type="text" id="answerInput" placeholder="あなたのこたえ">
                                   <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
       } else {
