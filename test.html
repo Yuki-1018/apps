@@ -4,23 +4,20 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>英単語テスト</title>
-      <style>
+  <style>
     body {
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
-      background-color: #f0f0f0;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      height: 100vh;
+      background-color: #f8f8f8;
+      text-align: center;
     }
     .container {
-      background-color: #fff;
-      border-radius: 10px;
-      padding: 20px;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      text-align: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
     }
     h1 {
       color: #333;
@@ -54,8 +51,9 @@
       text-decoration: underline;
     }
     .hint-button {
-      padding: 8px 16px;
+      display: none;
       margin-top: 10px;
+      padding: 8px 16px;
       font-size: 14px;
       border: none;
       border-radius: 20px;
@@ -70,26 +68,23 @@
     .hint-button:active {
       background-color: #1f618d;
     }
-    .quiz-content {
-      margin-top: 20px;
-    }
-    .result {
-      display: none;
-      margin-top: 20px;
-    }
   </style>
 </head>
 <body>
-  <h1>英単語テスト</h1>
-  <button id="startButton">スタート</button>
-  <input type="checkbox" id="randomCheckbox">
-  <label for="randomCheckbox">ランダム出題</label>
-  <button id="hintButton" style="display: none;">ヒント</button> <!-- ヒントボタン -->
-  <div id="quiz"></div>
-  <div id="result" style="display: none;">
-    <h2>結果</h2>
-    <p id="correctCount"></p>
-    <p id="incorrectWords"></p>
+  <div class="container">
+    <h1>英単語テスト</h1>
+    <button id="startButton">スタート</button>
+    <div class="options">
+      <input type="checkbox" id="randomCheckbox">
+      <label for="randomCheckbox">ランダム出題</label>
+    </div>
+    <div id="hintButtonContainer"></div> <!-- ヒントボタンのコンテナ -->
+    <div id="quiz"></div>
+    <div id="result" style="display: none;">
+      <h2>結果</h2>
+      <p id="correctCount"></p>
+      <p id="incorrectWords"></p>
+    </div>
   </div>
 
   <script>
@@ -107,7 +102,7 @@
     const quizContainer = document.getElementById('quiz');
     const startButton = document.getElementById('startButton');
     const randomCheckbox = document.getElementById('randomCheckbox');
-    const hintButton = document.getElementById('hintButton'); // ヒントボタンを取得
+    const hintButtonContainer = document.getElementById('hintButtonContainer'); // ヒントボタンのコンテナを取得
     const resultDiv = document.getElementById('result');
     const correctCountDisplay = document.getElementById('correctCount');
     const incorrectWordsDisplay = document.getElementById('incorrectWords');
@@ -115,7 +110,6 @@
     function startQuiz() {
       startButton.disabled = true;
       randomCheckbox.disabled = true;
-      hintButton.style.display = 'inline-block'; // スタート時にヒントボタンを表示
       randomMode = randomCheckbox.checked;
       currentIndex = 0;
       correctCount = 0;
@@ -164,12 +158,18 @@
     startButton.addEventListener('click', startQuiz);
 
     // ヒントボタンがクリックされたときの処理
-    hintButton.addEventListener('click', () => {
+    function hintButtonClicked() {
       const answerInput = document.getElementById('answerInput');
       const currentWord = words[currentIndex];
       if (currentWord) {
         answerInput.value = currentWord.word.charAt(0); // 最初の一文字を自動入力
       }
+    }
+
+    // スタートボタンがクリックされたときの処理
+    startButton.addEventListener('click', () => {
+      hintButtonContainer.innerHTML = '<button class="hint-button" id="hintButton" onclick="hintButtonClicked()">ヒント</button>'; // ヒントボタンをHTMLで設定
+      hintButtonContainer.style.display = 'inline-block'; // ヒントボタンを表示
     });
   </script>
 </body>
