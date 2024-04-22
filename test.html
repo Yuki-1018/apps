@@ -15,7 +15,7 @@
     h1 {
       color: #333;
     }
-    button, input[type="checkbox"] {
+    .button, .checkbox-square {
       padding: 10px 20px;
       margin-top: 10px;
       font-size: 16px;
@@ -24,20 +24,37 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    button:hover, input[type="checkbox"]:hover {
+    .button:hover, .checkbox-square:hover {
       background-color: #ddd;
     }
-    button:active, input[type="checkbox"]:active {
+    .button:active, .checkbox-square:active {
       background-color: #bbb;
     }
-    input[type="checkbox"] {
-      display: none;
+    .checkbox-square {
+      display: inline-block;
+      width: 15px;
+      height: 15px;
+      border: 1px solid #666;
+      border-radius: 3px;
+      position: relative;
+      top: 3px;
+      margin-right: 5px;
+    }
+    .checkbox-square.checked {
+      background-color: #666;
     }
     label[for="randomCheckbox"] {
       cursor: pointer;
       font-size: 14px;
       color: #666;
       margin-right: 10px;
+    }
+    .card {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      margin-top: 20px;
     }
     .hint-button {
       display: none;
@@ -61,11 +78,16 @@
 </head>
 <body>
   <h1>英単語テスト</h1>
-  <button id="startButton">スタート</button>
-  <label for="randomCheckbox">ランダム出題</label>
-  <input type="checkbox" id="randomCheckbox">
-  <button class="hint-button" id="hintButton">ヒント</button> <!-- ヒントボタン -->
-  <div id="quiz"></div>
+  <div>
+    <label for="randomCheckbox">
+      <div class="checkbox-square"></div>
+      ランダム出題
+    </label>
+    <input type="checkbox" id="randomCheckbox">
+  </div>
+  <button class="button" id="startButton">スタート</button>
+  <button class="button hint-button" id="hintButton">ヒント</button> <!-- ヒントボタン -->
+  <div class="card" id="quiz"></div>
   <div id="result" style="display: none;">
     <h2>結果</h2>
     <p id="correctCount"></p>
@@ -115,9 +137,9 @@
     function displayNextQuestion() {
       if (currentIndex < words.length) {
         const currentWord = words[currentIndex];
-        quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
+        quizContainer.innerHTML = `<div class="card"><p>${currentWord.meaning}</p>
                                   <input type="text" id="answerInput">
-                                  <button onclick="checkAnswer('${currentWord.word}')">解答</button>`;
+                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button></div>`;
       } else {
         showResult();
       }
