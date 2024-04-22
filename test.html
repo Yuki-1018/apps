@@ -15,7 +15,7 @@
     h1 {
       color: #333;
     }
-    .button, .checkbox-square {
+    .button {
       padding: 10px 20px;
       margin-top: 10px;
       font-size: 16px;
@@ -24,24 +24,11 @@
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    .button:hover, .checkbox-square:hover {
+    .button:hover {
       background-color: #ddd;
     }
-    .button:active, .checkbox-square:active {
+    .button:active {
       background-color: #bbb;
-    }
-    .checkbox-square {
-      display: inline-block;
-      width: 15px;
-      height: 15px;
-      border: 1px solid #666;
-      border-radius: 3px;
-      position: relative;
-      top: 3px;
-      margin-right: 5px;
-    }
-    .checkbox-square.checked {
-      background-color: #666;
     }
     label[for="randomCheckbox"] {
       cursor: pointer;
@@ -78,13 +65,8 @@
 </head>
 <body>
   <h1>英単語テスト</h1>
-  <div>
-    <label for="randomCheckbox">
-      <div class="checkbox-square"></div>
-      ランダム出題
-    </label>
-    <input type="checkbox" id="randomCheckbox">
-  </div>
+  <label for="randomCheckbox">ランダム出題</label>
+  <input type="checkbox" id="randomCheckbox" style="display: none;">
   <button class="button" id="startButton">スタート</button>
   <button class="button hint-button" id="hintButton">ヒント</button> <!-- ヒントボタン -->
   <div class="card" id="quiz"></div>
