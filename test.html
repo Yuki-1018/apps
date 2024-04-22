@@ -15,32 +15,29 @@
     h1 {
       color: #333;
     }
-    .container {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100vh;
-    }
-    .quiz-container {
-      margin-top: 20px;
-    }
-    .start-button {
+    button, input[type="checkbox"] {
       padding: 10px 20px;
       margin-top: 10px;
       font-size: 16px;
       border: none;
       border-radius: 5px;
-      background-color: #4CAF50;
-      color: white;
       cursor: pointer;
       transition: background-color 0.3s;
     }
-    .start-button:hover {
-      background-color: #45a049;
+    button:hover, input[type="checkbox"]:hover {
+      background-color: #ddd;
     }
-    .start-button:active {
-      background-color: #3e8e41;
+    button:active, input[type="checkbox"]:active {
+      background-color: #bbb;
+    }
+    input[type="checkbox"] {
+      display: none;
+    }
+    label[for="randomCheckbox"] {
+      cursor: pointer;
+      font-size: 14px;
+      color: #666;
+      margin-right: 10px;
     }
     .hint-button {
       display: none;
@@ -63,21 +60,17 @@
   </style>
 </head>
 <body>
-  <div class="container">
-    <h1>英単語テスト</h1>
-    <button class="start-button" id="startButton">スタート</button>
-    <div class="quiz-container" id="quiz"></div>
-    <div id="result" style="display: none;">
-      <h2>結果</h2>
-      <p id="correctCount"></p>
-      <p id="incorrectWords"></p>
-    </div>
-  </div>
-
-  <input type="checkbox" id="randomCheckbox" style="position: absolute; top: 10px; left: 10px;">
-  <label for="randomCheckbox" style="position: absolute; top: 12px; left: 30px; cursor: pointer; font-size: 14px; color: #666;">ランダム出題</label>
-
+  <h1>英単語テスト</h1>
+  <button id="startButton">スタート</button>
+  <label for="randomCheckbox">ランダム出題</label>
+  <input type="checkbox" id="randomCheckbox">
   <button class="hint-button" id="hintButton">ヒント</button> <!-- ヒントボタン -->
+  <div id="quiz"></div>
+  <div id="result" style="display: none;">
+    <h2>結果</h2>
+    <p id="correctCount"></p>
+    <p id="incorrectWords"></p>
+  </div>
 
   <script>
     let words;
