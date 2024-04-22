@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>英単語テスト</title>
   <style>
-    /* ボタンのスタイル */
+/* ボタンのスタイル */
 .key-container {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -14,9 +14,9 @@
 }
 
 .key {
-  width: calc(10% - 11px);
+  width: calc(100% - 1);
   height: 50px;
-
+  border: 1px solid #ccc;
   text-align: center;
   line-height: 50px;
   cursor: pointer;
@@ -26,6 +26,8 @@
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
   user-select: none; /* テキスト選択を無効化 */
+  padding: 10px; /* ボタンのpaddingを調整 */
+  margin: -1px; /* ボタン同士が隣り合っていても四角がくっつくようにマージンを調整 */
 }
 
 /* ボタンのホバー時のスタイル */
