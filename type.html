@@ -38,7 +38,7 @@
       box-sizing: border-box;
     }
 
-    button :not(main){
+    button main:not(.not_test-child){
       display: block;
       width: 100%;
       padding: 10px;
@@ -128,7 +128,7 @@
 
                                   <input type="text" id="answerInput" placeholder="あなたのこたえ">
                                   <button onclick="checkAnswer('${currentWord.word}')">解答</button>
-                                  <main>
+                                  <main class="not_test-child">
 
 <div>
     <button onclick="addText('Q')">Q</button>
