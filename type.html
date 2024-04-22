@@ -126,7 +126,7 @@
         const currentWord = words[currentIndex];
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
 
-                                  <input type="text" id="answerInput" placeholder="あなたのこたえ">
+                                  <input type="text" id="answerInput" placeholder="あなたのこたえ" readonly="readonly">
                                   <button onclick="checkAnswer('${currentWord.word}')">解答</button>
                                   <div class="not_test-child">
 
