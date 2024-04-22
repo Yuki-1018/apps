@@ -180,7 +180,42 @@
         quizContainer.style.display = 'block';
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
                                   <input type="text" id="answerInput">
-                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>`;
+                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>
+                                  <div>
+    <button onclick="addText('q')">q</button>
+    <button onclick="addText('w')">w</button>
+    <button onclick="addText('e')">e</button>
+    <button onclick="addText('r')">r</button>
+    <button onclick="addText('t')">t</button>
+    <button onclick="addText('y')">y</button>
+    <button onclick="addText('u')">u</button>
+    <button onclick="addText('i')">i</button>
+    <button onclick="addText('o')">o</button>
+    <button onclick="addText('p')">p</button>
+</div>
+<div>
+    <button onclick="addText('a')">a</button>
+    <button onclick="addText('s')">s</button>
+    <button onclick="addText('d')">d</button>
+    <button onclick="addText('f')">f</button>
+    <button onclick="addText('g')">g</button>
+    <button onclick="addText('h')">h</button>
+    <button onclick="addText('j')">j</button>
+    <button onclick="addText('k')">k</button>
+    <button onclick="addText('l')">l</button>
+</div>
+<div>
+    <button onclick="addText('z')">z</button>
+    <button onclick="addText('x')">x</button>
+    <button onclick="addText('c')">c</button>
+    <button onclick="addText('v')">v</button>
+    <button onclick="addText('b')">b</button>
+    <button onclick="addText('n')">n</button>
+    <button onclick="addText('m')">m</button>
+    <!-- バックスペースボタン -->
+    <button onclick="backspace()">backspace</button>
+</div>
+                                  `;
       } else {
         showResult();
       }
