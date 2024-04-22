@@ -16,7 +16,7 @@
 .key {
   width: calc(10% - 11px);
   height: 50px;
-  border: 1px solid #ccc;
+
   text-align: center;
   line-height: 50px;
   cursor: pointer;
@@ -213,7 +213,7 @@
         const currentWord = words[currentIndex];
         quizContainer.style.display = 'block';
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
-                                  <input type="text" id="answerInput">
+                                  <input type="text" readonly id="answerInput">
                                   <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>
                                   <div class="key-container">
     <div class="key" onclick="addText('q')">q</div>
