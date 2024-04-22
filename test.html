@@ -119,10 +119,12 @@
 </head>
 <body>
   <h1>英単語テスト</h1>
-  <label for="randomCheckbox">ランダム出題</label>
-  <input type="checkbox" id="randomCheckbox">
-  <button class="button" id="startButton">スタート</button><br>
-  <button class="button hint-button" id="hintButton">ヒント</button> <!-- ヒントボタン -->
+  <div id="startSection">
+    <label for="randomCheckbox">ランダム出題</label>
+    <input type="checkbox" id="randomCheckbox" style="display: none;">
+    <button class="button" id="startButton">スタート</button>
+  </div>
+  <button class="button hint-button" id="hintButton" style="display: none;">ヒント</button> <!-- ヒントボタン -->
   <div class="card" id="quiz" style="display: none;">
     <p></p>
     <input type="text" id="answerInput">
@@ -148,6 +150,7 @@
     let randomMode = false;
     const quizContainer = document.getElementById('quiz');
     const resultContainer = document.getElementById('result');
+    const startSection = document.getElementById('startSection');
     const startButton = document.getElementById('startButton');
     const randomCheckbox = document.getElementById('randomCheckbox');
     const hintButton = document.getElementById('hintButton'); // ヒントボタンを取得
@@ -155,8 +158,7 @@
     const incorrectWordsDisplay = document.getElementById('incorrectWords');
 
     function startQuiz() {
-      startButton.disabled = true;
-      randomCheckbox.disabled = true;
+      startSection.style.display = 'none'; // スタートボタンとチェックボックスを非表示にする
       hintButton.style.display = 'inline-block'; // スタート時にヒントボタンを表示
       randomMode = randomCheckbox.checked;
       currentIndex = 0;
@@ -180,42 +182,7 @@
         quizContainer.style.display = 'block';
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
                                   <input type="text" id="answerInput">
-                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>
-                                  <div>
-    <button onclick="addText('q')">q</button>
-    <button onclick="addText('w')">w</button>
-    <button onclick="addText('e')">e</button>
-    <button onclick="addText('r')">r</button>
-    <button onclick="addText('t')">t</button>
-    <button onclick="addText('y')">y</button>
-    <button onclick="addText('u')">u</button>
-    <button onclick="addText('i')">i</button>
-    <button onclick="addText('o')">o</button>
-    <button onclick="addText('p')">p</button>
-</div>
-<div>
-    <button onclick="addText('a')">a</button>
-    <button onclick="addText('s')">s</button>
-    <button onclick="addText('d')">d</button>
-    <button onclick="addText('f')">f</button>
-    <button onclick="addText('g')">g</button>
-    <button onclick="addText('h')">h</button>
-    <button onclick="addText('j')">j</button>
-    <button onclick="addText('k')">k</button>
-    <button onclick="addText('l')">l</button>
-</div>
-<div>
-    <button onclick="addText('z')">z</button>
-    <button onclick="addText('x')">x</button>
-    <button onclick="addText('c')">c</button>
-    <button onclick="addText('v')">v</button>
-    <button onclick="addText('b')">b</button>
-    <button onclick="addText('n')">n</button>
-    <button onclick="addText('m')">m</button>
-    <!-- バックスペースボタン -->
-    <button onclick="backspace()">backspace</button>
-</div>
-                                  `;
+                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>`;
       } else {
         showResult();
       }
@@ -250,19 +217,6 @@
         answerInput.value = currentWord.word.charAt(0); // 最初の一文字を自動入力
       }
     });
-    // テキストを入力欄に追加するJavaScript関数
-function addText(text) {
-  var input = document.getElementById('textInput');
-  input.value += text;
-}
-
-// バックスペース（削除）ボタンのJavaScript関数
-function backspace() {
-  var input = document.getElementById('textInput');
-  var currentValue = input.value;
-  // 最後の文字を削除
-  input.value = currentValue.slice(0, -1);
-}
   </script>
 </body>
 </html>
