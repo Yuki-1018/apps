@@ -128,7 +128,9 @@
 
                                   <input type="text" id="answerInput" placeholder="あなたのこたえ">
                                   <button onclick="checkAnswer('${currentWord.word}')">解答</button>
-                                  <div>
+                                  <main>
+  <!-- QWERTY配列に基づいたキーボードボタン -->
+<div>
     <button onclick="addText('Q')">Q</button>
     <button onclick="addText('W')">W</button>
     <button onclick="addText('E')">E</button>
@@ -159,8 +161,10 @@
     <button onclick="addText('B')">B</button>
     <button onclick="addText('N')">N</button>
     <button onclick="addText('M')">M</button>
-</div>
 
+    <button onclick="backspace()">Backspace</button>
+</div>
+</main>
                                   
                                   `;
       } else {
@@ -188,6 +192,19 @@
     }
 
     startButton.addEventListener('click', startQuiz);
+    // テキストを入力欄に追加するJavaScript関数
+function addText(text) {
+  var input = document.getElementById('textInput');
+  input.value += text;
+}
+
+// バックスペース（削除）ボタンのJavaScript関数
+function backspace() {
+  var input = document.getElementById('textInput');
+  var currentValue = input.value;
+  // 最後の文字を削除
+  input.value = currentValue.slice(0, -1);
+}
   </script>
   <script src="./script.js"></script>
 </body>
