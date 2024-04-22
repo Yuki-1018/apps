@@ -6,40 +6,42 @@
 <title>Inputとキーボードボタン（QWERTY配列＋バックスペース）</title>
 <style>
 /* ボタンのスタイル */
-.key-container {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  gap: 5px;
-  justify-content: center; /* ボタンを中央に配置 */
+.key-row {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 5px; /* 各行の間隔を設定 */
 }
 
 .key {
-  width: calc(10% - 11px);
+  flex: 1;
   height: 50px;
   border: 1px solid #ccc;
   text-align: center;
   line-height: 50px;
   cursor: pointer;
-  margin: 0;
+  margin: 0 2px; /* ボタン同士の間隔を設定 */
   font-size: 16px;
   background-color: #f8f8f8;
   border-radius: 5px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  user-select: none; /* テキスト選択を無効化 */
+}
+
+/* ボタンのホバー時のスタイル */
+.key:hover {
+  background-color: #e0e0e0;
 }
 
 /* バックスペースボタンのスタイル */
 .backspace {
-  grid-column: span 2; /* 2列分の幅を占有 */
+  margin-right: 4px; /* バックスペースボタンの右側の余白を設定 */
+  flex: 1; /* 1マス幅 */
 }
 
-/* テキスト入力欄のスタイル */
-#textInput {
-  width: 100%;
-  height: 50px;
-  font-size: 16px;
-  margin-bottom: 10px;
-  padding: 5px;
-  box-sizing: border-box;
+/* シフトボタンのスタイル */
+.shift {
+  margin-left: 4px; /* シフトボタンの左側の余白を設定 */
+  flex: 1; /* 1マス幅 */
 }
 </style>
 </head>
@@ -49,7 +51,7 @@
 <input type="text" id="textInput">
 
 <!-- QWERTY配列に基づいたキーボードボタン -->
-<div class="key-container">
+<div class="key-row">
     <div class="key" onclick="addText('q')">q</div>
     <div class="key" onclick="addText('w')">w</div>
     <div class="key" onclick="addText('e')">e</div>
@@ -60,6 +62,8 @@
     <div class="key" onclick="addText('i')">i</div>
     <div class="key" onclick="addText('o')">o</div>
     <div class="key" onclick="addText('p')">p</div>
+</div>
+<div class="key-row">
     <div class="key" onclick="addText('a')">a</div>
     <div class="key" onclick="addText('s')">s</div>
     <div class="key" onclick="addText('d')">d</div>
@@ -70,12 +74,16 @@
     <div class="key" onclick="addText('k')">k</div>
     <div class="key" onclick="addText('l')">l</div>
     <div class="key" onclick="addText('z')">z</div>
+</div>
+<div class="key-row">
     <div class="key" onclick="addText('x')">x</div>
     <div class="key" onclick="addText('c')">c</div>
     <div class="key" onclick="addText('v')">v</div>
     <div class="key" onclick="addText('b')">b</div>
     <div class="key" onclick="addText('n')">n</div>
     <div class="key" onclick="addText('m')">m</div>
+    <!-- シフト（大文字に切り替え）ボタン -->
+    <div class="key shift" onclick="toggleShift()">Shift</div>
     <!-- バックスペースボタン -->
     <div class="key backspace" onclick="backspace()">backspace</div>
 </div>
@@ -84,6 +92,11 @@
 // テキストを入力欄に追加するJavaScript関数
 function addText(text) {
   var input = document.getElementById('textInput');
+  if (shiftEnabled) {
+    text = text.toUpperCase(); // シフトが有効なら大文字に変換
+    shiftEnabled = false; // シフトを無効に戻す
+    document.querySelector('.shift').style.backgroundColor = ''; // シフトボタンの色をリセット
+  }
   input.value += text;
 }
 
@@ -93,6 +106,18 @@ function backspace() {
   var currentValue = input.value;
   // 最後の文字を削除
   input.value = currentValue.slice(0, -1);
+}
+
+// シフト（大文字に切り替え）ボタンのJavaScript関数
+var shiftEnabled = false; // 初期状態ではシフトは無効
+function toggleShift() {
+  shiftEnabled = !shiftEnabled; // シフトの状態を切り替え
+  var shiftButton = document.querySelector('.shift');
+  if (shiftEnabled) {
+    shiftButton.style.backgroundColor = '#e0e0e0'; // シフトが有効ならボタンを灰色にする
+  } else {
+    shiftButton.style.backgroundColor = ''; // シフトが無効ならボタンの色をリセット
+  }
 }
 </script>
 
