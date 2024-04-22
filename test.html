@@ -16,11 +16,11 @@
       color: #333;
     }
     .button {
-      padding: 10px 20px;
-      margin-top: 10px;
-      font-size: 16px;
+      padding: 15px 30px;
+      margin-top: 20px;
+      font-size: 18px;
       border: none;
-      border-radius: 5px;
+      border-radius: 8px;
       cursor: pointer;
       transition: background-color 0.3s;
     }
@@ -32,27 +32,58 @@
     }
     label[for="randomCheckbox"] {
       cursor: pointer;
-      font-size: 14px;
+      font-size: 16px;
       color: #666;
       margin-right: 10px;
     }
     .card {
       background-color: #fff;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      padding: 20px;
-      margin-top: 20px;
+      border-radius: 20px;
+      box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
+      padding: 40px;
+      margin-top: 40px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+    .card p {
+      font-size: 24px;
+      margin-bottom: 20px;
+    }
+    .card input[type="text"] {
+      width: 100%;
+      padding: 15px;
+      font-size: 18px;
+      margin-bottom: 20px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+    }
+    .card button {
+      padding: 15px 30px;
+      font-size: 18px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
+      transition: background-color 0.3s;
+    }
+    .card button:hover {
+      background-color: #2980b9;
+    }
+    .card button:active {
+      background-color: #1f618d;
     }
     .hint-button {
       display: none;
-      padding: 8px 16px;
-      margin-top: 10px;
-      font-size: 14px;
+      padding: 10px 20px;
+      margin-top: 20px;
+      font-size: 16px;
       border: none;
-      border-radius: 20px;
-      background-color: #3498db;
-      color: white;
+      border-radius: 8px;
       cursor: pointer;
+      background-color: #3498db;
+      color: #fff;
       transition: background-color 0.3s;
     }
     .hint-button:hover {
@@ -69,7 +100,11 @@
   <input type="checkbox" id="randomCheckbox" style="display: none;">
   <button class="button" id="startButton">スタート</button>
   <button class="button hint-button" id="hintButton">ヒント</button> <!-- ヒントボタン -->
-  <div class="card" id="quiz"></div>
+  <div class="card" id="quiz" style="display: none;">
+    <p></p>
+    <input type="text" id="answerInput">
+    <button class="button" onclick="checkAnswer()">解答</button>
+  </div>
   <div id="result" style="display: none;">
     <h2>結果</h2>
     <p id="correctCount"></p>
@@ -119,9 +154,10 @@
     function displayNextQuestion() {
       if (currentIndex < words.length) {
         const currentWord = words[currentIndex];
-        quizContainer.innerHTML = `<div class="card"><p>${currentWord.meaning}</p>
+        quizContainer.style.display = 'block';
+        quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
                                   <input type="text" id="answerInput">
-                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button></div>`;
+                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>`;
       } else {
         showResult();
       }
