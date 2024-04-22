@@ -42,10 +42,9 @@
       box-shadow: 0 6px 10px rgba(0, 0, 0, 0.1);
       padding: 40px;
       margin-top: 40px;
-      max-width: 600px;
+      max-width: 100%;
       margin-left: auto;
       margin-right: auto;
-      width: 100%; /* カードの幅を100%に設定 */
     }
     .card p {
       font-size: 24px;
@@ -129,7 +128,7 @@
     <input type="text" id="answerInput">
     <button class="button" onclick="checkAnswer()">解答</button>
   </div>
-  <div class="card" id="result" style="display: none;"> <!-- 結果もカード内に表示 -->
+  <div class="card" id="result" style="display: none;">
     <h2>結果</h2>
     <p id="correctCount"></p>
     <p id="incorrectWords"></p>
@@ -148,10 +147,10 @@
     let correctCount = 0;
     let randomMode = false;
     const quizContainer = document.getElementById('quiz');
+    const resultContainer = document.getElementById('result');
     const startButton = document.getElementById('startButton');
     const randomCheckbox = document.getElementById('randomCheckbox');
     const hintButton = document.getElementById('hintButton'); // ヒントボタンを取得
-    const resultDiv = document.getElementById('result');
     const correctCountDisplay = document.getElementById('correctCount');
     const incorrectWordsDisplay = document.getElementById('incorrectWords');
 
@@ -199,7 +198,8 @@
     }
 
     function showResult() {
-      resultDiv.style.display = 'block';
+      resultContainer.style.display = 'block';
+      quizContainer.style.display = 'none';
       correctCountDisplay.textContent = `正解数: ${correctCount}/${words.length}`;
       const incorrectWords = words.filter(word => !word.correct).map(word => word.word);
       incorrectWordsDisplay.textContent = `間違った単語: ${incorrectWords.join(', ')}`;
