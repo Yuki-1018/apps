@@ -250,6 +250,19 @@
         answerInput.value = currentWord.word.charAt(0); // 最初の一文字を自動入力
       }
     });
+    // テキストを入力欄に追加するJavaScript関数
+function addText(text) {
+  var input = document.getElementById('textInput');
+  input.value += text;
+}
+
+// バックスペース（削除）ボタンのJavaScript関数
+function backspace() {
+  var input = document.getElementById('textInput');
+  var currentValue = input.value;
+  // 最後の文字を削除
+  input.value = currentValue.slice(0, -1);
+}
   </script>
 </body>
 </html>
