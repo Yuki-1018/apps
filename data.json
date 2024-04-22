@@ -1,12 +1,202 @@
 [
-  { "word": "apple", "meaning": "りんご" },
-  { "word": "banana", "meaning": "バナナ" },
-  { "word": "carrot", "meaning": "にんじん" },
-  { "word": "dog", "meaning": "犬" },
-  { "word": "elephant", "meaning": "象" },
-  { "word": "flower", "meaning": "花" },
-  { "word": "guitar", "meaning": "ギター" },
-  { "word": "hamburger", "meaning": "ハンバーガー" },
-  { "word": "ice cream", "meaning": "アイスクリーム" },
-  { "word": "jacket", "meaning": "ジャケット" }
+  {
+    "word": "agree",
+    "meaning": "賛成する"
+  },
+  {
+    "word": "oppose",
+    "meaning": "～に反対する"
+  },
+  {
+    "word": "advise",
+    "meaning": "～に忠告する"
+  },
+  {
+    "word": "tip",
+    "meaning": "助言"
+  },
+  {
+    "word": "discuss",
+    "meaning": "〜について話し合う、議論する"
+  },
+  {
+    "word": "blame",
+    "meaning": "〜に責任があるとする"
+  },
+  {
+    "word": "argue",
+    "meaning": "～と主張する"
+  },
+  {
+    "word": "claim",
+    "meaning": "～と主張する"
+  },
+  {
+    "word": "complain",
+    "meaning": "文句を言う"
+  },
+  {
+    "word": "offer",
+    "meaning": "～を申し出る"
+  },
+  {
+    "word": "suggest",
+    "meaning": "〜を示唆する"
+  },
+  {
+    "word": "recommend",
+    "meaning": "〜を勧める、〜を推薦する"
+  },
+  {
+    "word": "grateful",
+    "meaning": "感謝している"
+  },
+  {
+    "word": "apologize",
+    "meaning": "謝る"
+  },
+  {
+    "word": "excuse",
+    "meaning": "言い訳"
+  },
+  {
+    "word": "celebrate",
+    "meaning": "を祝う；を挙行する"
+  },
+  {
+    "word": "admire",
+    "meaning": "～に感心する"
+  },
+  {
+    "word": "impress",
+    "meaning": "〜に感銘を与える"
+  },
+  {
+    "word": "award",
+    "meaning": "賞"
+  },
+  {
+    "word": "describe",
+    "meaning": "〜を説明する"
+  },
+  {
+    "word": "explain",
+    "meaning": "～を説明する"
+  },
+  {
+    "word": "communicate",
+    "meaning": "意思の疎通をはかる"
+  },
+  {
+    "word": "express",
+    "meaning": "を表現する"
+  },
+  {
+    "word": "promise",
+    "meaning": "約束"
+  },
+  {
+    "word": "information",
+    "meaning": "情報"
+  },
+  {
+    "word": "technology",
+    "meaning": "技術"
+  },
+  {
+    "word": "research",
+    "meaning": "研究、調査"
+  },
+  {
+    "word": "material",
+    "meaning": "材料、素材"
+  },
+  {
+    "word": "artificial",
+    "meaning": "人工的な"
+  },
+  {
+    "word": "electric",
+    "meaning": "電気の"
+  },
+  {
+    "word": "invent",
+    "meaning": "～を発明する"
+  },
+  {
+    "word": "discover",
+    "meaning": "〜を発見する"
+  },
+  {
+    "word": "develop",
+    "meaning": "発達する、発達させる"
+  },
+  {
+    "word": "skill",
+    "meaning": "技術,能力"
+  },
+  {
+    "word": "ability",
+    "meaning": "能力"
+  },
+  {
+    "word": "talent",
+    "meaning": "才能"
+  },
+  {
+    "word": "effort",
+    "meaning": "努力、取り組み"
+  },
+  {
+    "word": "practice",
+    "meaning": "練習"
+  },
+  {
+    "word": "game",
+    "meaning": "試合"
+  },
+  {
+    "word": "achieve",
+    "meaning": "～を達成する"
+  },
+  {
+    "word": "manage",
+    "meaning": "何とかして〜する"
+  },
+  {
+    "word": "improve",
+    "meaning": "〜を改善する、向上させる"
+  },
+  {
+    "word": "produce",
+    "meaning": "～を生産する"
+  },
+  {
+    "word": "create",
+    "meaning": "〜を創造する、生み出す"
+  },
+  {
+    "word": "establish",
+    "meaning": "～を確立する"
+  },
+  {
+    "word": "save",
+    "meaning": "...を省く，...を救う，...を貯蓄する"
+  },
+  {
+    "word": "medicine",
+    "meaning": "薬"
+  },
+  {
+    "word": "patient",
+    "meaning": "患者、忍耐強い"
+  },
+  {
+    "word": "condition",
+    "meaning": "状態、状況"
+  },
+  {
+    "word": "medical",
+    "meaning": "医療の、医学の"
+  }
 ]
