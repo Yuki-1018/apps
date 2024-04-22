@@ -182,7 +182,39 @@
         quizContainer.style.display = 'block';
         quizContainer.innerHTML = `<p>${currentWord.meaning}</p>
                                   <input type="text" id="answerInput">
-                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>`;
+                                  <button class="button" onclick="checkAnswer('${currentWord.word}')">解答</button>
+                                  <div class="key-container">
+    <div class="key" onclick="addText('q')">q</div>
+    <div class="key" onclick="addText('w')">w</div>
+    <div class="key" onclick="addText('e')">e</div>
+    <div class="key" onclick="addText('r')">r</div>
+    <div class="key" onclick="addText('t')">t</div>
+    <div class="key" onclick="addText('y')">y</div>
+    <div class="key" onclick="addText('u')">u</div>
+    <div class="key" onclick="addText('i')">i</div>
+    <div class="key" onclick="addText('o')">o</div>
+    <div class="key" onclick="addText('p')">p</div>
+    <div class="key" onclick="addText('a')">a</div>
+    <div class="key" onclick="addText('s')">s</div>
+    <div class="key" onclick="addText('d')">d</div>
+    <div class="key" onclick="addText('f')">f</div>
+    <div class="key" onclick="addText('g')">g</div>
+    <div class="key" onclick="addText('h')">h</div>
+    <div class="key" onclick="addText('j')">j</div>
+    <div class="key" onclick="addText('k')">k</div>
+    <div class="key" onclick="addText('l')">l</div>
+    <div class="key" onclick="addText('z')">z</div>
+    <div class="key" onclick="addText('x')">x</div>
+    <div class="key" onclick="addText('c')">c</div>
+    <div class="key" onclick="addText('v')">v</div>
+    <div class="key" onclick="addText('b')">b</div>
+    <div class="key" onclick="addText('n')">n</div>
+    <div class="key" onclick="addText('m')">m</div>
+    <!-- バックスペースボタン -->
+    <div class="key backspace" onclick="backspace()">backspace</div>
+</div>
+                                  
+                                  `;
       } else {
         showResult();
       }
