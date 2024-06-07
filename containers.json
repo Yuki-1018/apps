@@ -1,0 +1,10 @@
+[
+  {
+    "Description": "Windows Server 2008 Image",
+    "Format": "vhd",
+    "UserBucket": {
+      "S3Bucket": "yuki1018bh",
+      "S3Key": "a.vhd"
+    }
+  }
+]
