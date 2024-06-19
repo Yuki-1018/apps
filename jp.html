@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>英単語クイズ</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+      touch-action: pan-x pan-y;
+      -webkit-touch-callout:none; /* リンク長押しのポップアップを無効化 */
+-webkit-user-select:none; /* テキスト長押しの選択ボックスを無効化 */
+    }
+
+    h1 {
+      text-align: center;
+      margin-top: 20px;
+    }
+
+    #quiz {
+      display: none; /* スタートボタンが押されるまで非表示 */
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      box-sizing: border-box;
+    }
+
+    button {
+      display: block;
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      font-size: 16px;
+      background-color: #4caf50;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #result {
+      display: none; /* 結果画面は最初は非表示 */
+      margin-top: 20px;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  </style>
+</head>
+<body oncontextmenu='return false;' oncopy='return false;'>
+  <h1>英単語クイズ</h1>
+  <input type="checkbox" id="randomCheckbox">
+  <label for="randomCheckbox">ランダム出題</label>
+  <button id="startButton">スタート</button>
+  <div id="quiz"></div>
+  <div id="result">
+    <h2>結果</h2>
+    <p id="score"></p>
+    <p>間違えた単語</p>
+    <p id="incorrectWords"></p>
+    <form>
+        <input type="button" value="戻る" onclick="history.back()">
+        <input type="button" value="もう一度" onclick="location.reload()">
+    </form>
+  </div>
+
+  <script>
+    let words;
+    fetch('output.json')
+      .then(response => response.json())
+      .then(data => {
+        words = data;
+      })
+      .catch(error => console.error('データを読み込めませんでした。', error));
+
+    let currentQuestionIndex = 0;
+    let score = 0;
+    const quizContainer = document.getElementById('quiz');
+    const startButton = document.getElementById('startButton');
+    const randomCheckbox = document.getElementById('randomCheckbox');
+    const resultDiv = document.getElementById('result');
+    const scoreDisplay = document.getElementById('score');
+    const incorrectWordsDisplay = document.getElementById('incorrectWords');
+
+    function startQuiz() {
+      startButton.disabled = true;
+      randomCheckbox.disabled = true;
+      currentQuestionIndex = 0;
+      score = 0;
+      shuffleWords();
+      showQuestion();
+      quizContainer.style.display = 'block'; // スタート後に問題を表示
+    }
+
+    function shuffleWords() {
+      if (randomCheckbox.checked) {
+        for (let i = words.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [words[i], words[j]] = [words[j], words[i]];
+        }
+      }
+    }
+
+    function showQuestion() {
+      const currentWord = words[currentQuestionIndex];
+      const choices = generateChoices(currentWord.meaning);
+      const choiceButtons = choices.map(choice => `<button onclick="checkAnswer('${currentWord.meaning}', '${choice}')">${choice}</button>`).join('');
+      quizContainer.innerHTML = `<p>${currentWord.word}</p>${choiceButtons}`;
+    }
+
+    function generateChoices(correctMeaning) {
+      const choices = [correctMeaning];
+      while (choices.length < 4) {
+        const randomIndex = Math.floor(Math.random() * words.length);
+        const randomWord = words[randomIndex].meaning;
+        if (!choices.includes(randomWord)) {
+          choices.push(randomWord);
+        }
+      }
+      return shuffleArray(choices);
+    }
+
+    function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    }
+
+    function checkAnswer(correctMeaning, selectedMeaning) {
+      if (correctMeaning === selectedMeaning) {
+        score++;
+      } else {
+        // 不正解の単語を表示
+        incorrectWordsDisplay.textContent += ` ${words[currentQuestionIndex].word} ,`;
+      }
+      currentQuestionIndex++;
+      if (currentQuestionIndex < words.length) {
+        showQuestion();
+      } else {
+        showResult();
+      }
+    }
+
+    function showResult() {
+      resultDiv.style.display = 'block';
+      quizContainer.style.display = 'none'; // 結果画面では問題を非表示にする
+      scoreDisplay.textContent = `正解数: ${score}/${words.length}`;
+    }
+
+    startButton.addEventListener('click', startQuiz);
+  </script>
+</body>
+</html>
