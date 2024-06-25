@@ -1,10 +1,10 @@
 [
   {
-    "Description": "Windows Server 2008 Image",
-    "Format": "vhd",
+    "Description": "Windows Server 2003",
+    "Format": "vmdk",
     "UserBucket": {
-      "S3Bucket": "yuki1018bh",
-      "S3Key": "a.vhd"
+        "S3Bucket": "yukiec2",
+        "S3Key": "output.vmdk"
     }
   }
 ]
