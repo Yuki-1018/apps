@@ -1,10 +1,10 @@
 [
   {
-    "Description": "Windows Server 2003",
+    "Description": "Windows Server 2008",
     "Format": "vmdk",
     "UserBucket": {
-        "S3Bucket": "yukiec2",
-        "S3Key": "output.vmdk"
+        "S3Bucket": "ec2vm",
+        "S3Key": "windows.vmdk"
     }
   }
 ]
