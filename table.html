@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word and Meaning Table</title>
+    <style>
+        table {
+            width: 50%;
+            border-collapse: collapse;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<h2>Word and Meaning Table</h2>
+
+<table>
+    <tr>
+        <th>Word</th>
+        <th>Meaning</th>
+    </tr>
+</table>
+
+<script>
+    fetch('words.txt')
+        .then(response => response.text())
+        .then(data => {
+            const lines = data.trim().split('\n');
+            const table = document.querySelector('table');
+
+            lines.forEach(line => {
+                const [word, meaning] = line.split(',').map(item => item.trim());
+                const row = document.createElement('tr');
+                const wordCell = document.createElement('td');
+                wordCell.textContent = word;
+                const meaningCell = document.createElement('td');
+                meaningCell.textContent = meaning;
+                row.appendChild(wordCell);
+                row.appendChild(meaningCell);
+                table.appendChild(row);
+            });
+        })
+        .catch(error => console.error('Error fetching the file:', error));
+</script>
+
+</body>
+</html>
