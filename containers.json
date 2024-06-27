@@ -1,10 +1,10 @@
 [
   {
     "Description": "Windows Server 2008",
-    "Format": "vmdk",
+    "Format": "vhd",
     "UserBucket": {
         "S3Bucket": "ec2vm",
-        "S3Key": "windows.vmdk"
+        "S3Key": "windows.vhd"
     }
   }
 ]
